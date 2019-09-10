@@ -227,7 +227,14 @@ class App extends Component {
                 this.state.localStream != null ? <LocalVideoView stream={this.state.localStream} muted={this.state.video_muted} id={'localview'} /> : null
               }
             </div>
-            <div className={css.btnTools}>
+            <div style="position: absolute;
+    bottom: 20px;
+    left: 0px;
+    right: 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;">
               <Button variant="fab" mini color="primary" aria-label="add" style={styles.btnTool} onClick={this.onVideoOnClickHandler}>
                 {
                   this.state.video_muted ? <VideoOffIcon /> : <VideoOnIcon />
