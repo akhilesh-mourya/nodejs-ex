@@ -21,21 +21,7 @@ app.get('/', function (req, res) {
 
     const body = renderToString(<App />);
 
-    res.send(`
-    <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Flutter WebRTC Demo</title>
-</head>
-
-<body>
-    <div id="app">${body}</div>
-</body>
-
-</html>
-  `);
+    res.render('index.html');
 
 });
 
