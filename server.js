@@ -1,5 +1,10 @@
 
 //  OpenShift sample Node application
+
+import { renderToString } from 'react-dom/server';
+import App from './views/App.js';
+
+
 var express = require('express'),
     app     = express(),
     morgan  = require('morgan');
@@ -14,6 +19,8 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
 
 app.get('/', function (req, res) {
 
+    const body = renderToString(<App />);
+
     res.send(`
     <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +31,7 @@ app.get('/', function (req, res) {
 </head>
 
 <body>
-    <div id="app"></div>
+    <div id="app">${body}</div>
 </body>
 
 </html>
