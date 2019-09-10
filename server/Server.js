@@ -21,24 +21,24 @@ export default class CallHandler {
 
     init() {
 
-        var ws_server_port = (process.env.PORT || 4442);
-        this.server = http.createServer(app).listen(ws_server_port, () => {
-            console.log("Start WS Server: bind => ws://0.0.0.0:"+ws_server_port);
-        });
-
-        this.ws = new ws.Server({ server: this.server });
-        this.ws.on('connection', this.onConnection);
+        var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
+        ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
 
 
-        var options = {
-            key: fs.readFileSync('certs/key.pem'),
-            cert: fs.readFileSync('certs/cert.pem')
-        };
+        // this.server = http.createServer(app).listen(port, ip, () => {
+        //     console.log("Start WS Server: bind => ws://0.0.0.0:"+ws_server_port);
+        // });
 
-        var wss_server_port = (process.env.PORT + 1 || 4443);
-        this.ssl_server = https.createServer(options, app).listen(wss_server_port, () => {
-            console.log("Start WSS Server: bind => wss://0.0.0.0:"+wss_server_port);
-        });
+        // this.ws = new ws.Server({ server: this.server });
+        // this.ws.on('connection', this.onConnection);
+
+
+        // var options = {
+        //     key: fs.readFileSync('certs/key.pem'),
+        //     cert: fs.readFileSync('certs/cert.pem')
+        // };
+
+        this.ssl_server = app.listen(port, ip);
 
         this.wss = new ws.Server({ server: this.ssl_server });
         this.wss.on('connection', this.onConnection);
