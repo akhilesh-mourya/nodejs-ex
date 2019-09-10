@@ -1,4 +1,3 @@
-import Index from './src/index.js';
 
 //  OpenShift sample Node application
 var express = require('express'),
@@ -14,12 +13,22 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 
 app.get('/', function (req, res) {
-    const appString = renderToString(<Index />);
 
-    res.send(template({
-      body: appString,
-      title: 'Hello Varsha'
-    }));
+    res.send(`
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Flutter WebRTC Demo</title>
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+
+</html>
+  `);
 
 });
 
