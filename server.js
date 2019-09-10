@@ -71,7 +71,7 @@ var options = {
 };
 
 var wss_server_port = port;
-this.ssl_server = https.createServer(options, app).listen(wss_server_port, ip, () => {
+this.ssl_server = http.createServer(app).listen(wss_server_port, ip, () => {
   console.log("Start WSS Server: bind => wss://0.0.0.0:"+wss_server_port);
 });
 
